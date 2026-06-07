@@ -1,16 +1,20 @@
 #!/usr/bin/env bash
 #
-# Build downloadable, skills-ONLY ZIPs into dist/ — no README, license, scripts, or repo
-# noise. Two kinds of artifact are produced:
+# Build downloadable, noise-free ZIPs into dist/ — no README, license, scripts, or repo
+# scaffolding. Three kinds of artifact are produced:
 #
-#   1. dist/<skill-name>.zip   One ZIP per skill, with the skill folder at the zip root
-#                              (e.g. hello-openkit/SKILL.md). This is the shape the
-#                              claude.ai "Upload a skill" flow requires (one skill per upload).
+#   1. dist/<skill-name>.zip        One ZIP per skill, skill folder at the zip root
+#                                   (e.g. hello-openkit/SKILL.md). Required shape for the
+#                                   claude.ai "Upload a skill" flow (one skill per upload).
 #
-#   2. dist/openkit-skills.zip A single bundle of every skill folder at the zip root. This is
-#                              the clean "give me all the skills in one click" download for a
-#                              website link. Drop straight into Claude Code:
-#                                  unzip openkit-skills.zip -d ~/.claude/skills/
+#   2. dist/openkit-skills.zip      Bundle of every skill folder at the zip root. The clean
+#                                   "give me all the skills in one click" download. Drop into
+#                                   Claude Code:  unzip openkit-skills.zip -d ~/.claude/skills/
+#
+#   3. dist/openkit-tools-plugin.zip  The whole thing as ONE plugin (plugin manifest + all
+#                                   skills). This is the file for Claude Cowork's
+#                                   "upload a custom plugin file" path — installing it makes
+#                                   every skill available at once.
 #
 # Usage:  bash scripts/build-skill-zips.sh
 # Output: dist/*.zip  (gitignored; published to GitHub Releases by CI)
@@ -21,6 +25,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SKILLS_DIR="$ROOT/skills"
 DIST_DIR="$ROOT/dist"
 BUNDLE_NAME="openkit-skills.zip"
+PLUGIN_NAME="openkit-tools-plugin.zip"
 
 rm -rf "$DIST_DIR"
 mkdir -p "$DIST_DIR"
@@ -41,14 +46,18 @@ if [[ ${#names[@]} -eq 0 ]]; then
   exit 1
 fi
 
-# 1. One ZIP per skill (for claude.ai per-skill upload)
+# 1. One ZIP per skill (claude.ai per-skill upload)
 for name in "${names[@]}"; do
   ( cd "$SKILLS_DIR" && zip -r -q -X "$DIST_DIR/$name.zip" "$name" -x '*.DS_Store' )
   echo "built:  dist/$name.zip"
 done
 
-# 2. One bundle ZIP of all skills (for the clean website download link)
+# 2. Bundle of all skills (clean website "all skills" download)
 ( cd "$SKILLS_DIR" && zip -r -q -X "$DIST_DIR/$BUNDLE_NAME" "${names[@]}" -x '*.DS_Store' )
 echo "built:  dist/$BUNDLE_NAME  (${#names[@]} skill(s))"
 
-echo "Done — ${#names[@]} skill(s): ${#names[@]} per-skill ZIP(s) + 1 bundle in dist/"
+# 3. Plugin package (Cowork "upload a custom plugin file" — all skills as one plugin)
+( cd "$ROOT" && zip -r -q -X "$DIST_DIR/$PLUGIN_NAME" .claude-plugin/plugin.json skills -x '*.DS_Store' )
+echo "built:  dist/$PLUGIN_NAME  (plugin: openkit-tools)"
+
+echo "Done — ${#names[@]} skill(s): per-skill ZIPs + skills bundle + plugin package in dist/"

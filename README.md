@@ -28,6 +28,13 @@ curl -L -o openkit-skills.zip \
 unzip openkit-skills.zip -d ~/.claude/skills/
 ```
 
+**As one Claude Cowork plugin** — `openkit-tools-plugin.zip` (every skill bundled into a
+single plugin; this is the file for Cowork's "upload a custom plugin file"):
+
+```
+https://github.com/openkit/claude-plugins/releases/latest/download/openkit-tools-plugin.zip
+```
+
 **One skill at a time** — needed for **claude.ai web/desktop**, which accepts one skill per
 upload:
 
@@ -80,6 +87,21 @@ folder at the zip's root):
 once under **Organization settings → Skills**, and it appears automatically for every user —
 no per-person upload needed.
 
+### Option 4 — Claude Cowork (installs every skill at once)
+
+Cowork installs **plugins** (bundles of skills), so a single install delivers the whole kit —
+no picking skills one by one. Two ways:
+
+- **Add marketplace from GitHub** (nothing to download): Cowork → **Customize → Plugins → `+`
+  → Add marketplace** → enter `openkit/claude-plugins` → install **openkit-tools**. Every
+  skill becomes available immediately (type `/` in chat or Cowork to see them).
+- **Upload the plugin file**: download `openkit-tools-plugin.zip` from
+  [Releases](https://github.com/openkit/claude-plugins/releases/latest) and use the **upload**
+  option on the Plugins page.
+
+**For teams:** an org owner can distribute the marketplace org-wide and mark the plugin as
+*required* / *auto-installed*, so everyone gets all the skills with zero manual steps.
+
 > Maintainers: rebuild every skill's ZIP locally with `bash scripts/build-skill-zips.sh`
 > (outputs to `dist/`). CI does this automatically on each `v*` tag and attaches the ZIPs to
 > the matching GitHub Release.
@@ -117,9 +139,10 @@ claude-plugins/
 └── LICENSE
 ```
 
-This one repo serves **three** audiences from a single source of truth: Claude Code users
-(`npx skills` or `/plugin`) install straight from git, and Claude.ai web/desktop users
-download a per-skill ZIP from Releases and upload it in the UI.
+This one repo is a single source of truth for **every** Claude surface: Claude Code
+(`npx skills` or `/plugin`) installs straight from git; **Claude Cowork** adds the same repo
+as a marketplace and installs the whole plugin (all skills) at once, or takes the plugin file;
+and **claude.ai** web/desktop users download a per-skill ZIP and upload it in the UI.
 
 The repo root doubles as both the **marketplace** and a single **plugin**
 (`openkit-tools`), so all skills live in the top-level `skills/` directory.
