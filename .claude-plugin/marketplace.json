@@ -1,0 +1,21 @@
+{
+  "name": "openkit",
+  "owner": {
+    "name": "OpenKit",
+    "email": "reuben@openkit.co.uk"
+  },
+  "metadata": {
+    "description": "OpenKit's official Claude skills & plugins."
+  },
+  "plugins": [
+    {
+      "name": "openkit-tools",
+      "source": "./",
+      "description": "OpenKit's collection of Claude skills — prompt engineering, docs, and internal workflows.",
+      "homepage": "https://github.com/openkit/claude-plugins",
+      "license": "MIT",
+      "keywords": ["openkit", "skills"],
+      "category": "productivity"
+    }
+  ]
+}

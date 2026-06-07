@@ -1,0 +1,14 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Node / npx skills consumer artifacts (not part of the published repo)
+node_modules/
+.skills.json
+skills-lock.json
+
+# Logs
+*.log

@@ -1,0 +1,13 @@
+{
+  "name": "openkit-tools",
+  "description": "OpenKit's collection of Claude skills — prompt engineering, docs, and internal workflows.",
+  "version": "0.1.0",
+  "author": {
+    "name": "OpenKit",
+    "email": "reuben@openkit.co.uk"
+  },
+  "homepage": "https://github.com/openkit/claude-plugins",
+  "repository": "https://github.com/openkit/claude-plugins",
+  "license": "MIT",
+  "keywords": ["openkit", "skills", "prompts"]
+}
