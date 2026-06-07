@@ -39,12 +39,17 @@ changes.** On every meaningful change:
 
 1. Bump `version` in `.claude-plugin/plugin.json` (semver).
 2. Commit and push to `main`.
-3. (Optional) Tag the release so you can pin to it later:
+3. Tag the release `v<version>` and push the tag. This triggers CI
+   (`.github/workflows/release-skill-zips.yml`) to build one ZIP per skill and attach them to
+   the GitHub Release — that's what web/desktop (claude.ai) users download and upload:
 
    ```bash
-   claude plugin tag .        # creates an openkit-tools--v<version> git tag
-   git push --tags
+   git tag v0.1.0
+   git push origin main --tags
    ```
+
+4. (Optional) `claude plugin tag .` creates a separate `openkit-tools--v<version>` tag used
+   only for pinning plugin *dependency* versions — unrelated to the `v*` release tag above.
 
 > **Alternative (lower maintenance):** delete the `version` field from `plugin.json`
 > entirely. Claude Code then uses the git commit SHA as the version, so every push is

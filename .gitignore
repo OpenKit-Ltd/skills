@@ -10,5 +10,8 @@ node_modules/
 .skills.json
 skills-lock.json
 
+# Built skill ZIPs (produced by scripts/build-skill-zips.sh; published to Releases by CI)
+dist/
+
 # Logs
 *.log
