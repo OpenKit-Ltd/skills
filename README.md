@@ -10,6 +10,38 @@ model-invoked capabilities for Claude Code, Claude.ai, and any tool that support
 
 ---
 
+## ⬇️ Download the skills (no repo to clone, no sifting)
+
+Clean, skills-only ZIPs — nothing else in them. These are the links to put on the website.
+
+**All skills in one click** — `openkit-skills.zip`:
+
+```
+https://github.com/openkit/claude-plugins/releases/latest/download/openkit-skills.zip
+```
+
+The bundle contains only the skill folders. Claude Code users can drop them straight in:
+
+```bash
+curl -L -o openkit-skills.zip \
+  https://github.com/openkit/claude-plugins/releases/latest/download/openkit-skills.zip
+unzip openkit-skills.zip -d ~/.claude/skills/
+```
+
+**One skill at a time** — needed for **claude.ai web/desktop**, which accepts one skill per
+upload:
+
+| Skill | Direct download link |
+| :---- | :------------------- |
+| `hello-openkit` | `https://github.com/openkit/claude-plugins/releases/latest/download/hello-openkit.zip` |
+
+> These `releases/latest/download/…` URLs are **permanent** — they always serve the newest
+> release, so hard-code them on the OpenKit site once and never touch them again. They go live
+> as soon as you cut the first release (push a `v*` tag — CI builds the ZIPs and attaches
+> them). See [CONTRIBUTING.md](./CONTRIBUTING.md#cut-a-release).
+
+---
+
 ## Install
 
 ### Option 1 — `npx skills` (easiest, works across 30+ agents)
