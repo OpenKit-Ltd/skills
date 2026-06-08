@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 #
-# Build downloadable, noise-free ZIPs into dist/ — no README, license, scripts, or repo
-# scaffolding. Three kinds of artifact are produced:
+# Build the downloadable release artifacts into dist/. Two files:
 #
-#   1. dist/<skill-name>.zip        One ZIP per skill, skill folder at the zip root
-#                                   (e.g. hello-openkit/SKILL.md). Required shape for the
-#                                   claude.ai "Upload a skill" flow (one skill per upload).
+#   1. dist/openkit-skills.zip       The main download. Unzips to a FLAT list of one
+#                                    <skill-name>.md file per skill — no nested folders to
+#                                    click through. Each .md is the skill's full SKILL.md
+#                                    content (with its name/description frontmatter), so you
+#                                    can drag an individual file into Claude's web/desktop UI.
 #
-#   2. dist/openkit-skills.zip      Bundle of every skill folder at the zip root. The clean
-#                                   "give me all the skills in one click" download. Drop into
-#                                   Claude Code:  unzip openkit-skills.zip -d ~/.claude/skills/
+#   2. dist/openkit-tools-plugin.zip The whole kit as ONE plugin (plugin manifest + all skill
+#                                    folders). For Claude Cowork's "upload a custom plugin
+#                                    file" path — installs every skill at once.
 #
-#   3. dist/openkit-tools-plugin.zip  The whole thing as ONE plugin (plugin manifest + all
-#                                   skills). This is the file for Claude Cowork's
-#                                   "upload a custom plugin file" path — installing it makes
-#                                   every skill available at once.
+# Note: the flat bundle assumes each skill is a single SKILL.md with no supporting files
+# (scripts/, references/, assets/). If a skill gains supporting files, it can't ship as a
+# single flat .md — give that skill its own folder-based zip instead.
 #
 # Usage:  bash scripts/build-skill-zips.sh
 # Output: dist/*.zip  (gitignored; published to GitHub Releases by CI)
@@ -46,18 +46,17 @@ if [[ ${#names[@]} -eq 0 ]]; then
   exit 1
 fi
 
-# 1. One ZIP per skill (claude.ai per-skill upload)
+# 1. Flat markdown bundle: one <skill-name>.md per skill, no subfolders
+stage="$(mktemp -d)"
 for name in "${names[@]}"; do
-  ( cd "$SKILLS_DIR" && zip -r -q -X "$DIST_DIR/$name.zip" "$name" -x '*.DS_Store' )
-  echo "built:  dist/$name.zip"
+  cp "$SKILLS_DIR/$name/SKILL.md" "$stage/$name.md"
 done
+( cd "$stage" && zip -q -X "$DIST_DIR/$BUNDLE_NAME" ./*.md )
+rm -rf "$stage"
+echo "built:  dist/$BUNDLE_NAME  (${#names[@]} flat .md file(s): ${names[*]})"
 
-# 2. Bundle of all skills (clean website "all skills" download)
-( cd "$SKILLS_DIR" && zip -r -q -X "$DIST_DIR/$BUNDLE_NAME" "${names[@]}" -x '*.DS_Store' )
-echo "built:  dist/$BUNDLE_NAME  (${#names[@]} skill(s))"
-
-# 3. Plugin package (Cowork "upload a custom plugin file" — all skills as one plugin)
+# 2. Plugin package (Cowork "upload a custom plugin file" — all skills as one plugin)
 ( cd "$ROOT" && zip -r -q -X "$DIST_DIR/$PLUGIN_NAME" .claude-plugin/plugin.json skills -x '*.DS_Store' )
 echo "built:  dist/$PLUGIN_NAME  (plugin: openkit-tools)"
 
-echo "Done — ${#names[@]} skill(s): per-skill ZIPs + skills bundle + plugin package in dist/"
+echo "Done — flat skills bundle + plugin package in dist/"

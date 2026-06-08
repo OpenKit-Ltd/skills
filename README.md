@@ -13,42 +13,38 @@ other agent that reads `SKILL.md`.
 
 ## ⬇️ Download the skills (no repo to clone, no sifting)
 
-Clean, skills-only ZIPs — nothing else in them. These are the links to put on the website.
+One link, skills only. Unzipping gives a **flat list of three `.md` files** — one per skill,
+nothing to click through.
 
-**All skills in one click** — `openkit-skills.zip`:
+**Download — the link for the website:**
 
 ```
 https://github.com/OpenKit-Ltd/skills/releases/latest/download/openkit-skills.zip
 ```
 
-The bundle contains only the skill folders. Claude Code users can drop them straight in:
+Unzip and you get, side by side:
 
-```bash
-curl -L -o openkit-skills.zip \
-  https://github.com/OpenKit-Ltd/skills/releases/latest/download/openkit-skills.zip
-unzip openkit-skills.zip -d ~/.claude/skills/
+```
+build-user-context.md
+inbox-triage.md
+build-inbox-voice.md
 ```
 
-**As one Claude Cowork plugin** — `openkit-tools-plugin.zip` (every skill bundled into a
-single plugin; this is the file for Cowork's "upload a custom plugin file"):
+In Claude's web/desktop app, add each one under **Customize → Skills** (start with
+`build-user-context` — the other two build on it). For Claude Code, use `npx skills add` or
+`/plugin` from the Install section below instead; those pull straight from the repo.
+
+**Claude Cowork plugin file** — `openkit-tools-plugin.zip` installs all three as one plugin
+via Cowork's "upload a custom plugin file":
 
 ```
 https://github.com/OpenKit-Ltd/skills/releases/latest/download/openkit-tools-plugin.zip
 ```
 
-**One skill at a time** — needed for **claude.ai web/desktop**, which accepts one skill per
-upload:
-
-| Skill | Direct download link |
-| :---- | :------------------- |
-| `build-user-context` | `https://github.com/OpenKit-Ltd/skills/releases/latest/download/build-user-context.zip` |
-| `inbox-triage` | `https://github.com/OpenKit-Ltd/skills/releases/latest/download/inbox-triage.zip` |
-| `build-inbox-voice` | `https://github.com/OpenKit-Ltd/skills/releases/latest/download/build-inbox-voice.zip` |
-
 > These `releases/latest/download/…` URLs are **permanent** — they always serve the newest
-> release, so hard-code them on the OpenKit site once and never touch them again. They go live
-> as soon as you cut the first release (push a `v*` tag — CI builds the ZIPs and attaches
-> them). See [CONTRIBUTING.md](./CONTRIBUTING.md#cut-a-release).
+> release, so hard-code them on the OpenKit site once and never touch them again. A new
+> release is cut whenever a `v*` tag is pushed (CI rebuilds these artifacts).
+> See [CONTRIBUTING.md](./CONTRIBUTING.md#cut-a-release).
 
 ---
 
@@ -74,21 +70,17 @@ whichever agent you have installed. Add `-g` for a global (all-projects) install
 Then run a skill directly, e.g. `/openkit-tools:inbox-triage`. Update later with
 `/plugin marketplace update openkit`.
 
-### Option 3 — Claude.ai web & desktop (no CLI, no commands)
+### Option 3 — Claude web & desktop (no CLI, no commands)
 
-If you use Claude in the browser or desktop app, you don't run any commands — you
-**upload a skill as a ZIP**. To make that one click, every release ships pre-built,
-correctly-shaped ZIPs (the claude.ai uploader requires one ZIP per skill, with the skill
-folder at the zip's root):
+No commands — you add each skill through the UI:
 
-1. Open the [**Releases**](https://github.com/OpenKit-Ltd/skills/releases) page and
-   download the ZIP for the skill you want (e.g. `build-user-context.zip` — set this up first).
-2. In Claude, go to **Customize → Skills → `+` → Create skill → Upload a skill** and select
-   the ZIP. (Requires code execution enabled; available on Free, Pro, Max, Team, Enterprise.)
+1. Download `openkit-skills.zip` (link at the top) and unzip it — you get three `.md` files
+   (`build-user-context.md`, `inbox-triage.md`, `build-inbox-voice.md`).
+2. In Claude, go to **Customize → Skills** and add each one. Start with `build-user-context`,
+   since the other two build on it.
 
-**For teams (easiest of all):** on Team/Enterprise plans an org owner uploads each skill
-once under **Organization settings → Skills**, and it appears automatically for every user —
-no per-person upload needed.
+**For teams:** on Team/Enterprise plans an org owner can add the skills once under
+**Organization settings → Skills** so they appear automatically for everyone.
 
 ### Option 4 — Claude Cowork (installs every skill at once)
 
@@ -105,9 +97,9 @@ no picking skills one by one. Two ways:
 **For teams:** an org owner can distribute the marketplace org-wide and mark the plugin as
 *required* / *auto-installed*, so everyone gets all the skills with zero manual steps.
 
-> Maintainers: rebuild every skill's ZIP locally with `bash scripts/build-skill-zips.sh`
-> (outputs to `dist/`). CI does this automatically on each `v*` tag and attaches the ZIPs to
-> the matching GitHub Release.
+> Maintainers: rebuild the download artifacts locally with `bash scripts/build-skill-zips.sh`
+> (outputs to `dist/`). CI does this automatically on each `v*` tag and attaches them to the
+> matching GitHub Release.
 
 ---
 
@@ -145,7 +137,7 @@ skills/                       # repo root (github.com/OpenKit-Ltd/skills)
 ├── templates/
 │   └── SKILL.template.md    # copy this to start a new skill
 ├── scripts/
-│   └── build-skill-zips.sh  # builds one claude.ai-uploadable ZIP per skill -> dist/
+│   └── build-skill-zips.sh  # builds the flat skills bundle + plugin package -> dist/
 ├── .github/workflows/
 │   └── release-skill-zips.yml  # CI: attach skill ZIPs to each GitHub Release
 ├── CONTRIBUTING.md          # how to add a skill + how to cut a release
