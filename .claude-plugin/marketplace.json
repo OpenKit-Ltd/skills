@@ -12,7 +12,7 @@
       "name": "openkit-tools",
       "source": "./",
       "description": "OpenKit's collection of Claude skills — prompt engineering, docs, and internal workflows.",
-      "homepage": "https://github.com/openkit/claude-plugins",
+      "homepage": "https://github.com/openkit/skills",
       "license": "MIT",
       "keywords": ["openkit", "skills"],
       "category": "productivity"

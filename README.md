@@ -17,14 +17,14 @@ Clean, skills-only ZIPs — nothing else in them. These are the links to put on 
 **All skills in one click** — `openkit-skills.zip`:
 
 ```
-https://github.com/openkit/claude-plugins/releases/latest/download/openkit-skills.zip
+https://github.com/openkit/skills/releases/latest/download/openkit-skills.zip
 ```
 
 The bundle contains only the skill folders. Claude Code users can drop them straight in:
 
 ```bash
 curl -L -o openkit-skills.zip \
-  https://github.com/openkit/claude-plugins/releases/latest/download/openkit-skills.zip
+  https://github.com/openkit/skills/releases/latest/download/openkit-skills.zip
 unzip openkit-skills.zip -d ~/.claude/skills/
 ```
 
@@ -32,7 +32,7 @@ unzip openkit-skills.zip -d ~/.claude/skills/
 single plugin; this is the file for Cowork's "upload a custom plugin file"):
 
 ```
-https://github.com/openkit/claude-plugins/releases/latest/download/openkit-tools-plugin.zip
+https://github.com/openkit/skills/releases/latest/download/openkit-tools-plugin.zip
 ```
 
 **One skill at a time** — needed for **claude.ai web/desktop**, which accepts one skill per
@@ -40,7 +40,7 @@ upload:
 
 | Skill | Direct download link |
 | :---- | :------------------- |
-| `hello-openkit` | `https://github.com/openkit/claude-plugins/releases/latest/download/hello-openkit.zip` |
+| `hello-openkit` | `https://github.com/openkit/skills/releases/latest/download/hello-openkit.zip` |
 
 > These `releases/latest/download/…` URLs are **permanent** — they always serve the newest
 > release, so hard-code them on the OpenKit site once and never touch them again. They go live
@@ -54,7 +54,7 @@ upload:
 ### Option 1 — `npx skills` (easiest, works across 30+ agents)
 
 ```bash
-npx skills add openkit/claude-plugins
+npx skills add openkit/skills
 ```
 
 No Claude session required, no restart — it drops the skills into the right place for
@@ -64,7 +64,7 @@ whichever agent you have installed. Add `-g` for a global (all-projects) install
 ### Option 2 — Claude Code plugin marketplace (versioned + auto-updating)
 
 ```text
-/plugin marketplace add openkit/claude-plugins
+/plugin marketplace add openkit/skills
 /plugin install openkit-tools@openkit
 ```
 
@@ -78,7 +78,7 @@ If you use Claude in the browser or desktop app, you don't run any commands — 
 correctly-shaped ZIPs (the claude.ai uploader requires one ZIP per skill, with the skill
 folder at the zip's root):
 
-1. Open the [**Releases**](https://github.com/openkit/claude-plugins/releases) page and
+1. Open the [**Releases**](https://github.com/openkit/skills/releases) page and
    download the ZIP for the skill you want (e.g. `hello-openkit.zip`).
 2. In Claude, go to **Customize → Skills → `+` → Create skill → Upload a skill** and select
    the ZIP. (Requires code execution enabled; available on Free, Pro, Max, Team, Enterprise.)
@@ -93,10 +93,10 @@ Cowork installs **plugins** (bundles of skills), so a single install delivers th
 no picking skills one by one. Two ways:
 
 - **Add marketplace from GitHub** (nothing to download): Cowork → **Customize → Plugins → `+`
-  → Add marketplace** → enter `openkit/claude-plugins` → install **openkit-tools**. Every
+  → Add marketplace** → enter `openkit/skills` → install **openkit-tools**. Every
   skill becomes available immediately (type `/` in chat or Cowork to see them).
 - **Upload the plugin file**: download `openkit-tools-plugin.zip` from
-  [Releases](https://github.com/openkit/claude-plugins/releases/latest) and use the **upload**
+  [Releases](https://github.com/openkit/skills/releases/latest) and use the **upload**
   option on the Plugins page.
 
 **For teams:** an org owner can distribute the marketplace org-wide and mark the plugin as
@@ -173,8 +173,8 @@ above, and bump the version in `.claude-plugin/plugin.json`.
 
 ## A note on the repo name
 
-All install commands above assume this repo lives at **`github.com/openkit/claude-plugins`**.
-If you push it somewhere else (e.g. `openkit/skills`), find-and-replace `openkit/claude-plugins`
+All install commands and download links assume this repo lives at
+**`github.com/openkit/skills`**. If you ever move it, find-and-replace `openkit/skills`
 in this README and in the `homepage`/`repository` fields of `plugin.json` and
 `marketplace.json`.
 

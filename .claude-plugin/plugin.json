@@ -6,8 +6,8 @@
     "name": "OpenKit",
     "email": "reuben@openkit.co.uk"
   },
-  "homepage": "https://github.com/openkit/claude-plugins",
-  "repository": "https://github.com/openkit/claude-plugins",
+  "homepage": "https://github.com/openkit/skills",
+  "repository": "https://github.com/openkit/skills",
   "license": "MIT",
   "keywords": ["openkit", "skills", "prompts"]
 }
