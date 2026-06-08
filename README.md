@@ -41,7 +41,9 @@ upload:
 
 | Skill | Direct download link |
 | :---- | :------------------- |
-| `hello-openkit` | `https://github.com/OpenKit-Ltd/skills/releases/latest/download/hello-openkit.zip` |
+| `build-user-context` | `https://github.com/OpenKit-Ltd/skills/releases/latest/download/build-user-context.zip` |
+| `inbox-triage` | `https://github.com/OpenKit-Ltd/skills/releases/latest/download/inbox-triage.zip` |
+| `build-inbox-voice` | `https://github.com/OpenKit-Ltd/skills/releases/latest/download/build-inbox-voice.zip` |
 
 > These `releases/latest/download/…` URLs are **permanent** — they always serve the newest
 > release, so hard-code them on the OpenKit site once and never touch them again. They go live
@@ -69,7 +71,7 @@ whichever agent you have installed. Add `-g` for a global (all-projects) install
 /plugin install openkit-tools@openkit
 ```
 
-Then run a skill directly, e.g. `/openkit-tools:hello-openkit`. Update later with
+Then run a skill directly, e.g. `/openkit-tools:inbox-triage`. Update later with
 `/plugin marketplace update openkit`.
 
 ### Option 3 — Claude.ai web & desktop (no CLI, no commands)
@@ -80,7 +82,7 @@ correctly-shaped ZIPs (the claude.ai uploader requires one ZIP per skill, with t
 folder at the zip's root):
 
 1. Open the [**Releases**](https://github.com/OpenKit-Ltd/skills/releases) page and
-   download the ZIP for the skill you want (e.g. `hello-openkit.zip`).
+   download the ZIP for the skill you want (e.g. `build-user-context.zip` — set this up first).
 2. In Claude, go to **Customize → Skills → `+` → Create skill → Upload a skill** and select
    the ZIP. (Requires code execution enabled; available on Free, Pro, Max, Team, Enterprise.)
 
@@ -111,23 +113,34 @@ no picking skills one by one. Two ways:
 
 ## Available skills
 
+These three skills make up the **OpenKit Inbox** suite. Set them up in order — start with
+`build-user-context`, which the other two depend on.
+
 | Skill | What it does |
 | :---- | :----------- |
-| `hello-openkit` | Starter skill — introduces the collection and how to use it. _(placeholder; replace with real skills)_ |
+| `build-user-context` | **Run first.** Interviews you and researches your email to generate your personalised `user-context` skill — who you are, who you work with, the projects that matter, and how you write. Prerequisite for the rest. |
+| `inbox-triage` | Reads your inbox over a chosen window and returns a structured brief — **Urgent / Watching / Skip** — as colour-coded priority cards that expand on click. Read-only; never drafts or sends. Uses `user-context`. |
+| `build-inbox-voice` | Analyses your sent/received threads to build an `inbox-reply-drafter` skill that writes replies in your voice. Uses `user-context`. |
 
-_(This table is the front door for users — keep it updated as skills are added.)_
+> `build-user-context` and `build-inbox-voice` are *builders*: running them generates two
+> further skills — `user-context` and `inbox-reply-drafter` — which you install the same way
+> as any other skill.
 
 ---
 
 ## What's in here
 
 ```
-claude-plugins/
+skills/                       # repo root (github.com/OpenKit-Ltd/skills)
 ├── .claude-plugin/
 │   ├── marketplace.json     # marketplace catalog (enables /plugin marketplace add)
 │   └── plugin.json          # plugin manifest (this repo == one plugin: "openkit-tools")
 ├── skills/                  # one folder per skill, each with a SKILL.md
-│   └── hello-openkit/
+│   ├── build-user-context/
+│   │   └── SKILL.md
+│   ├── inbox-triage/
+│   │   └── SKILL.md
+│   └── build-inbox-voice/
 │       └── SKILL.md
 ├── templates/
 │   └── SKILL.template.md    # copy this to start a new skill
@@ -160,7 +173,7 @@ claude plugin validate .
 
 # Load the plugin into a throwaway Claude Code session without installing it
 claude --plugin-dir .
-#   then inside the session: /openkit-tools:hello-openkit
+#   then inside the session: /openkit-tools:inbox-triage
 #   after edits:             /reload-plugins
 ```
 
