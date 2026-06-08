@@ -5,16 +5,16 @@
     "email": "reuben@openkit.co.uk"
   },
   "metadata": {
-    "description": "OpenKit's official Claude skills & plugins."
+    "description": "OpenKit's open Agent Skills (SKILL.md) — reusable, cross-tool skills for Claude, Codex/ChatGPT, Cursor, Gemini CLI, and more."
   },
   "plugins": [
     {
       "name": "openkit-tools",
       "source": "./",
-      "description": "OpenKit's collection of Claude skills — prompt engineering, docs, and internal workflows.",
+      "description": "OpenKit's Agent Skills (open SKILL.md standard) — prompt engineering, docs, and internal workflows. Works in Claude, Codex/ChatGPT, Cursor, and more.",
       "homepage": "https://github.com/openkit/skills",
       "license": "MIT",
-      "keywords": ["openkit", "skills"],
+      "keywords": ["openkit", "skills", "agent-skills"],
       "category": "productivity"
     }
   ]

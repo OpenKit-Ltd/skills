@@ -1,6 +1,6 @@
 {
   "name": "openkit-tools",
-  "description": "OpenKit's collection of Claude skills — prompt engineering, docs, and internal workflows.",
+  "description": "OpenKit's Agent Skills (open SKILL.md standard) — prompt engineering, docs, and internal workflows. Works in Claude, Codex/ChatGPT, Cursor, and more.",
   "version": "0.1.0",
   "author": {
     "name": "OpenKit",
@@ -9,5 +9,5 @@
   "homepage": "https://github.com/openkit/skills",
   "repository": "https://github.com/openkit/skills",
   "license": "MIT",
-  "keywords": ["openkit", "skills", "prompts"]
+  "keywords": ["openkit", "skills", "agent-skills", "prompts"]
 }

@@ -1,8 +1,9 @@
 # OpenKit Skills
 
-OpenKit's official collection of [Claude Agent Skills](https://agentskills.io) — reusable,
-model-invoked capabilities for Claude Code, Claude.ai, and any tool that supports the open
-`SKILL.md` standard (Cursor, Codex, Gemini CLI, Copilot, and more).
+OpenKit's collection of [Agent Skills](https://agentskills.io) — reusable, model-invoked
+capabilities built on the open `SKILL.md` standard, so they work across **Claude** (Code,
+Cowork, claude.ai), **Codex / ChatGPT**, **Cursor**, **Gemini CLI**, **Copilot**, and any
+other agent that reads `SKILL.md`.
 
 > This repo is set up so the **same GitHub repo works for both** the cross-tool
 > `npx skills` installer **and** the native Claude Code plugin marketplace. Pick whichever
@@ -139,10 +140,12 @@ claude-plugins/
 └── LICENSE
 ```
 
-This one repo is a single source of truth for **every** Claude surface: Claude Code
-(`npx skills` or `/plugin`) installs straight from git; **Claude Cowork** adds the same repo
-as a marketplace and installs the whole plugin (all skills) at once, or takes the plugin file;
-and **claude.ai** web/desktop users download a per-skill ZIP and upload it in the UI.
+This one repo is a single source of truth for **every** agent: any `SKILL.md`-compatible
+tool (**Codex / ChatGPT**, **Cursor**, **Gemini CLI**, **Copilot**, …) installs with
+`npx skills add openkit/skills`; **Claude Code** uses that or `/plugin`; **Claude Cowork**
+adds the repo as a marketplace and installs the whole plugin (all skills) at once, or takes
+the plugin file; and **claude.ai** web/desktop users download a per-skill ZIP and upload it
+in the UI.
 
 The repo root doubles as both the **marketplace** and a single **plugin**
 (`openkit-tools`), so all skills live in the top-level `skills/` directory.
