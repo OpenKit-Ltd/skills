@@ -2,7 +2,7 @@
 #
 # Build the downloadable release artifacts into dist/. Two files:
 #
-#   1. dist/openkit-skills.zip       The main download. Unzips to a FLAT list of one
+#   1. dist/openkit-inbox-skills.zip       The main download. Unzips to a FLAT list of one
 #                                    <skill-name>.md file per skill — no nested folders to
 #                                    click through. Each .md is the skill's full SKILL.md
 #                                    content (with its name/description frontmatter), so you
@@ -24,7 +24,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SKILLS_DIR="$ROOT/skills"
 DIST_DIR="$ROOT/dist"
-BUNDLE_NAME="openkit-skills.zip"
+BUNDLE_NAME="openkit-inbox-skills.zip"
 PLUGIN_NAME="openkit-tools-plugin.zip"
 
 rm -rf "$DIST_DIR"

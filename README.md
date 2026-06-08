@@ -19,7 +19,7 @@ nothing to click through.
 **Download — the link for the website:**
 
 ```
-https://github.com/OpenKit-Ltd/skills/releases/latest/download/openkit-skills.zip
+https://github.com/OpenKit-Ltd/skills/releases/latest/download/openkit-inbox-skills.zip
 ```
 
 Unzip and you get, side by side:
@@ -74,7 +74,7 @@ Then run a skill directly, e.g. `/openkit-tools:inbox-triage`. Update later with
 
 No commands — you add each skill through the UI:
 
-1. Download `openkit-skills.zip` (link at the top) and unzip it — you get three `.md` files
+1. Download `openkit-inbox-skills.zip` (link at the top) and unzip it — you get three `.md` files
    (`build-user-context.md`, `inbox-triage.md`, `build-inbox-voice.md`).
 2. In Claude, go to **Customize → Skills** and add each one. Start with `build-user-context`,
    since the other two build on it.
