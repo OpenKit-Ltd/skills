@@ -12,7 +12,7 @@
       "name": "openkit-tools",
       "source": "./",
       "description": "OpenKit's Agent Skills (open SKILL.md standard) — prompt engineering, docs, and internal workflows. Works in Claude, Codex/ChatGPT, Cursor, and more.",
-      "homepage": "https://github.com/openkit/skills",
+      "homepage": "https://github.com/OpenKit-Ltd/skills",
       "license": "MIT",
       "keywords": ["openkit", "skills", "agent-skills"],
       "category": "productivity"

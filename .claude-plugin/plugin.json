@@ -6,8 +6,8 @@
     "name": "OpenKit",
     "email": "reuben@openkit.co.uk"
   },
-  "homepage": "https://github.com/openkit/skills",
-  "repository": "https://github.com/openkit/skills",
+  "homepage": "https://github.com/OpenKit-Ltd/skills",
+  "repository": "https://github.com/OpenKit-Ltd/skills",
   "license": "MIT",
   "keywords": ["openkit", "skills", "agent-skills", "prompts"]
 }
